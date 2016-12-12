@@ -20,7 +20,15 @@ public class DataConfig {
 		for (String node : properties.getRedisNodes())
 			jedisClusterNodes.add(new HostAndPort(node.split(":")[0], Integer.valueOf(node.split(":")[1])));
 		
-		jedis = new JedisCluster(jedisClusterNodes, properties.getRedisTimeOut(), properties.getRedisMaxRedirects());
+		if (properties.getRedisTimeOut() > 0) {
+			if (properties.getRedisMaxRedirects() > 0) {
+				jedis = new JedisCluster(jedisClusterNodes, properties.getRedisTimeOut(), properties.getRedisMaxRedirects());
+			} else {
+				jedis = new JedisCluster(jedisClusterNodes, properties.getRedisTimeOut());
+			}
+		} else {
+			jedis = new JedisCluster(jedisClusterNodes);
+		}
 	}
 	
 	public static DataConfig getInstance() {

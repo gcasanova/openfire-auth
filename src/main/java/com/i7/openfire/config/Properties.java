@@ -22,8 +22,8 @@ public class Properties {
     	domain = JiveGlobals.getProperty(Conf.DOMAIN.toString());
     	keyPath = JiveGlobals.getProperty(Conf.KEY_PATH.toString());
     	issuer = JiveGlobals.getProperty(Conf.ISSUER_NAME.toString());
-    	redisTimeOut = Integer.valueOf(JiveGlobals.getProperty(Conf.REDIS_TIMEOUT.toString()));
-    	redisMaxRedirects = Integer.valueOf(JiveGlobals.getProperty(Conf.REDIS_MAX_REDIRECTS.toString()));
+    	redisTimeOut = JiveGlobals.getIntProperty(Conf.REDIS_TIMEOUT.toString(), 0);
+    	redisMaxRedirects = JiveGlobals.getIntProperty(Conf.REDIS_MAX_REDIRECTS.toString(), 0);
     	redisNodes = Sets.newHashSet(Arrays.asList(JiveGlobals.getProperty(Conf.REDIS_NODES.toString()).split(",")));
     }
     
